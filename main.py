@@ -1,7 +1,7 @@
 from models.model_reg import RegisterIn, RegisterOut
 from models.model_user import UserIn, UserOut, CreateUser
 from db.users_db import db_user
-from db.users_db import get_user, update_user, create_user_indb
+from db.users_db import get_user, update_user, create_user_indb, delete_user_indb
 from db.reg_db import bd_register
 from db.reg_db import save_register, find_register
 from fastapi import FastAPI, HTTPException
@@ -11,7 +11,7 @@ quebrados_app = FastAPI()
 
 origins = [
     "http://localhost.tiangolo.com", "https://localhost.tiangolo.com",
-    "http://localhost", "http://localhost:8080", "https://quebrados-app2.herokuapp.com",
+    "http://localhost", "http://localhost:8080", "https://quebrados-app12.herokuapp.com",
 ]
 
 quebrados_app.add_middleware(
@@ -83,3 +83,13 @@ async def create_user(datosRegistro: CreateUser):
         datosRegistro=db_user(**datosRegistro.dict(), total=0)
         create_user_indb(datosRegistro)
         return {"respuesta": "El usuario se registró correctamente. Por favor ingresa a continuación con tu nuevo usuario y contraseña"}
+
+@quebrados_app.delete("/user/delete/{user}")
+async def delete_user(user:str):
+    usuario = get_user(user)
+    if (usuario==None):
+        return {"respuesta": "Lo sentimos, el nombre de usuario no existe"}
+    else:
+        #Borrar usuario
+        delete_user_indb(usuario)
+        return{"respuesta":"El usuario se eliminó correctamente"}

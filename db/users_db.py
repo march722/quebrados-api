@@ -45,3 +45,7 @@ def update_user(user_db: db_user):
 
 def create_user_indb(newUser: db_user):
     database_users[newUser.user] = newUser
+    
+
+def delete_user_indb(newUser:db_user):
+    del database_users[newUser.user]

@@ -25,7 +25,13 @@ def find_register(user: str):
     for reg in database_registers:
         if user == reg.user:
             find.append(reg)
-    return find   
+    return find  
+
+#def delete_register(concept:str):
+#    for reg in database_registers:
+#        if concept == reg.concept:
+#            database_registers.pop(reg)
+#/    return concept  
 
 
 
