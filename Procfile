@@ -1,1 +1,1 @@
-web: uvicorn main:quebrados_app --host=0.0.0.0 --port=${PORT:-5000}
+web: uvicorn main:quebrados_front --host=0.0.0.0 --port=${PORT:-5000}
